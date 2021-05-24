@@ -1,0 +1,8 @@
+1. Log-in to the pod
+kubectl exec -it (pod name) -- /bin/bash
+
+2. Create User
+htpasswd /opt/nagios/etc/htpasswd.users Username
+
+3. Check created user
+curl -u Username http://localhost
