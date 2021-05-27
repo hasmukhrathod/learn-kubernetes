@@ -1,0 +1,221 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Pod","metadata":{"annotations":{},"name":"nginx-phpfpm","namespace":"default"},"spec":{"containers":[{"image":"php:7.2-fpm","name":"php-fpm-container","volumeMounts":[{"mountPath":"/var/www/html","name":"shared-files"}]},{"image":"nginx:latest","name":"nginx-container","volumeMounts":[{"mountPath":"/usr/share/nginx/html","name":"shared-files"},{"mountPath":"/etc/nginx/nginx.conf","name":"nginx-config-volume","subPath":"nginx.conf"}]}],"volumes":[{"emptyDir":{},"name":"shared-files"},{"configMap":{"name":"nginx-config"},"name":"nginx-config-volume"}]}}
+  creationTimestamp: "2021-05-14T02:35:12Z"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+      f:spec:
+        f:containers:
+          k:{"name":"nginx-container"}:
+            .: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/etc/nginx/nginx.conf"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+                f:subPath: {}
+              k:{"mountPath":"/usr/share/nginx/html"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+          k:{"name":"php-fpm-container"}:
+            .: {}
+            f:image: {}
+            f:imagePullPolicy: {}
+            f:name: {}
+            f:resources: {}
+            f:terminationMessagePath: {}
+            f:terminationMessagePolicy: {}
+            f:volumeMounts:
+              .: {}
+              k:{"mountPath":"/var/www/html"}:
+                .: {}
+                f:mountPath: {}
+                f:name: {}
+        f:dnsPolicy: {}
+        f:enableServiceLinks: {}
+        f:restartPolicy: {}
+        f:schedulerName: {}
+        f:securityContext: {}
+        f:terminationGracePeriodSeconds: {}
+        f:volumes:
+          .: {}
+          k:{"name":"nginx-config-volume"}:
+            .: {}
+            f:configMap:
+              .: {}
+              f:defaultMode: {}
+              f:name: {}
+            f:name: {}
+          k:{"name":"shared-files"}:
+            .: {}
+            f:emptyDir: {}
+            f:name: {}
+    manager: kubectl-client-side-apply
+    operation: Update
+    time: "2021-05-14T02:35:12Z"
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:status:
+        f:conditions:
+          k:{"type":"ContainersReady"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Initialized"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+          k:{"type":"Ready"}:
+            .: {}
+            f:lastProbeTime: {}
+            f:lastTransitionTime: {}
+            f:status: {}
+            f:type: {}
+        f:containerStatuses: {}
+        f:hostIP: {}
+        f:phase: {}
+        f:podIP: {}
+        f:podIPs:
+          .: {}
+          k:{"ip":"10.244.1.2"}:
+            .: {}
+            f:ip: {}
+        f:startTime: {}
+    manager: kubelet
+    operation: Update
+    time: "2021-05-14T02:35:52Z"
+  name: nginx-phpfpm
+  namespace: default
+  resourceVersion: "727"
+  selfLink: /api/v1/namespaces/default/pods/nginx-phpfpm
+  uid: a742ea11-6ecf-4d87-8b15-bd27fd0514d3
+spec:
+  containers:
+  - image: php:7.2-fpm
+    imagePullPolicy: IfNotPresent
+    name: php-fpm-container
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/www/html
+      name: shared-files
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-gthk2
+      readOnly: true
+  - image: nginx:latest
+    imagePullPolicy: Always
+    name: nginx-container
+    resources: {}
+    terminationMessagePath: /dev/termination-log
+    terminationMessagePolicy: File
+    volumeMounts:
+    - mountPath: /var/www/html
+      name: shared-files
+    - mountPath: /etc/nginx/nginx.conf
+      name: nginx-config-volume
+      subPath: nginx.conf
+    - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+      name: default-token-gthk2
+      readOnly: true
+  dnsPolicy: ClusterFirst
+  enableServiceLinks: true
+  nodeName: node01
+  preemptionPolicy: PreemptLowerPriority
+  priority: 0
+  restartPolicy: Always
+  schedulerName: default-scheduler
+  securityContext: {}
+  serviceAccount: default
+  serviceAccountName: default
+  terminationGracePeriodSeconds: 30
+  tolerations:
+  - effect: NoExecute
+    key: node.kubernetes.io/not-ready
+    operator: Exists
+    tolerationSeconds: 300
+  - effect: NoExecute
+    key: node.kubernetes.io/unreachable
+    operator: Exists
+    tolerationSeconds: 300
+  volumes:
+  - emptyDir: {}
+    name: shared-files
+  - configMap:
+      defaultMode: 420
+      name: nginx-config
+    name: nginx-config-volume
+  - name: default-token-gthk2
+    secret:
+      defaultMode: 420
+      secretName: default-token-gthk2
+status:
+  conditions:
+  - lastProbeTime: null
+    lastTransitionTime: "2021-05-14T02:35:11Z"
+    status: "True"
+    type: Initialized
+  - lastProbeTime: null
+    lastTransitionTime: "2021-05-14T02:35:51Z"
+    status: "True"
+    type: Ready
+  - lastProbeTime: null
+    lastTransitionTime: "2021-05-14T02:35:51Z"
+    status: "True"
+    type: ContainersReady
+  - lastProbeTime: null
+    lastTransitionTime: "2021-05-14T02:35:12Z"
+    status: "True"
+    type: PodScheduled
+  containerStatuses:
+  - containerID: docker://14edaf999de19dbceda762c8f1eaba1de5c501454ede5f628b0dc7a75a321356
+    image: nginx:latest
+    imageID: docker-pullable://nginx@sha256:df13abe416e37eb3db4722840dd479b00ba193ac6606e7902331dcea50f4f1f2
+    lastState: {}
+    name: nginx-container
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2021-05-14T02:35:51Z"
+  - containerID: docker://d517c53666dce0569cd99e4b630ae73469b4c647acb9f9e387337213b2e90feb
+    image: php:7.2-fpm
+    imageID: docker-pullable://php@sha256:9c84ae47fddb97b94d1d2e289635b7306142a5336bc4ece0a393458c5e0d2cef
+    lastState: {}
+    name: php-fpm-container
+    ready: true
+    restartCount: 0
+    started: true
+    state:
+      running:
+        startedAt: "2021-05-14T02:35:45Z"
+  hostIP: 172.17.0.9
+  phase: Running
+  podIP: 10.244.1.2
+  podIPs:
+  - ip: 10.244.1.2
+  qosClass: BestEffort
+  startTime: "2021-05-14T02:35:11Z"
